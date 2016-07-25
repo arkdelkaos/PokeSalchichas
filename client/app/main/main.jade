@@ -1,6 +1,7 @@
 header#banner.hero-unit
   .container
-    h1 "¡Carne pa' la Picadora!"
+    h1
+      a(href='https://www.youtube.com/watch?v=WLAdocFOqD0') "¡Carne pa' la Picadora!"
     p.lead ¿Que pokemons he de salvar, y cuales son basura?
     img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
 
@@ -18,7 +19,7 @@ header#banner.hero-unit
         div.input-group.input-group-lg
           span.input-group-addon
             span.glyphicon.glyphicon-barcode
-          input.form-control(type="text", placeholder="Contraseña", aria-describedby="basic-addon1", ng-model='$ctrl.user.password')
+          input.form-control(type="password", placeholder="Contraseña", aria-describedby="basic-addon1", ng-model='$ctrl.user.password')
 
         div.btn-group
           label.btn.btn-primary(ng-model="$ctrl.user.proveedor", uib-btn-radio="'ptc'") PTC
@@ -39,7 +40,7 @@ header#banner.hero-unit
           button.btn.btn-success.btn-lg.btn-login(type='submit')
             | Conectarse
 
-      ul.nav.nav-tabs.nav-stacked.col-md-2.col-lg-2.col-sm-2.col-xs-4(ng-repeat='pokemon in $ctrl.pokeLista')
+      ul.nav.nav-tabs.nav-stacked.col-md-2.col-lg-2.col-sm-2.col-xs-4.pokeLista(ng-repeat='pokemon in $ctrl.pokeLista')
               li
                 img.text-center.img-responsive.center-block(src='{{ pokemon.info.img }}')
                 h5.text-center {{ pokemon.info.name }}
@@ -47,3 +48,9 @@ header#banner.hero-unit
                 p.text-center(ng-class="(pokemon.indAttack == 15) ? 'bg-success' : ((pokemon.indAttack >= 12) ? 'bg-warning' : '')") ATK {{ pokemon.indAttack }}
                 p.text-center(ng-class="(pokemon.indDefense == 15) ? 'bg-success' : ((pokemon.indDefense >= 12) ? 'bg-warning' : '')") DEF {{ pokemon.indDefense }}
                 p.text-center(ng-class="(pokemon.indStamina == 15) ? 'bg-success' : ((pokemon.indStamina >= 12) ? 'bg-warning' : '')") STA {{ pokemon.indStamina }}
+                p.text-center(ng-class="((((pokemon.indAttack+pokemon.indDefense+pokemon.indStamina)*100)/45) == 100) ? 'bg-success' : (((((pokemon.indAttack+pokemon.indDefense+pokemon.indStamina)*100)/45) >= 80) ? 'bg-warning' : (((((pokemon.indAttack+pokemon.indDefense+pokemon.indStamina)*100)/45) <= 60) ? 'bg-danger' : ''))")
+                  strong {{(((pokemon.indAttack+pokemon.indDefense+pokemon.indStamina)*100)/45)| number:0}}%
+                button.btn.btn-danger.disabled.btn-lg.center-block(type='button', ng-click='$ctrl.picaPokemon(pokemon)', ng-show='(((pokemon.indAttack+pokemon.indDefense+pokemon.indStamina)*100)/45) <= 60')
+                  span.glyphicon.glyphicon-erase
+                  | Picadora
+                div.cubreBoton(ng-show='(((pokemon.indAttack+pokemon.indDefense+pokemon.indStamina)*100)/45) > 60')

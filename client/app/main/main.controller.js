@@ -53,6 +53,18 @@
           this.pokeLista = response.data;
         })
     }
+
+    picaPokemon(pokemon){
+      this.$log.info(pokemon);
+      this.$http.delete('/pgo/'+pokemon.id)
+        .then(response => {
+          this.$log.info(response);
+          if(response.status=201){
+            this.pokelista = response;
+          }
+          //this.pokeLista.splice(arr.indexOf(pokemon),1);
+        })
+    }
   }
 
   angular.module('pgoPokeSalchichasApp')
