@@ -1,0 +1,42 @@
+.thing-form {
+  margin: 20px 0;
+}
+
+#banner {
+  border-bottom: none;
+  margin-top: -20px;
+}
+
+#banner h1 {
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.container .form {
+  margin-bottom: 15px;
+  div {
+    padding-top: 3px;
+  }
+  .alert{
+    margin-bottom: 10px;
+    margin-top: 3px;
+  }
+  .btn-login{
+    margin-top: 0px;
+    width: 200px;
+  }
+}
+
+.hero-unit {
+  position: relative;
+  padding: 30px 15px;
+  color: #F5F5F5;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  background: #333;
+}
+
+.navbar-text {
+  margin-left: 15px;
+}

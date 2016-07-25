@@ -1,0 +1,49 @@
+header#banner.hero-unit
+  .container
+    h1 "¡Carne pa' la Picadora!"
+    p.lead ¿Que pokemons he de salvar, y cuales son basura?
+    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
+
+.container
+  .row
+    .col-lg-12
+      h1.page-header Cuenta de PokemonGO:
+      form.form(name='form', ng-submit='$ctrl.getPokemons()', novalidate='')
+
+        div.input-group.input-group-lg
+          span.input-group-addon
+            span.glyphicon.glyphicon-user
+          input.form-control(type="text", placeholder="Usuario", aria-describedby="basic-addon1", ng-model='$ctrl.user.user')
+
+        div.input-group.input-group-lg
+          span.input-group-addon
+            span.glyphicon.glyphicon-barcode
+          input.form-control(type="text", placeholder="Contraseña", aria-describedby="basic-addon1", ng-model='$ctrl.user.password')
+
+        div.btn-group
+          label.btn.btn-primary(ng-model="$ctrl.user.proveedor", uib-btn-radio="'ptc'") PTC
+          label.btn.btn-primary(ng-model="$ctrl.user.proveedor", uib-btn-radio="'google'") Google
+
+        div.input-group.input-group-lg
+          span.input-group-addon
+            span.glyphicon.glyphicon-globe
+          input.form-control(type="text", placeholder="Plaza del Sol 1, Madrid, 28013 Spain", aria-describedby="basic-addon1", ng-model='$ctrl.user.localization')
+
+        div.alert.alert-danger(ng-show='$ctrl.error')
+          p Hay algún tipo de error con los datos que has introducido.
+          p Comprueba que el nombre de usuario y contraseña sean correctos
+          p Has de seleccionar el proveedor entre "Pokemon Trainer Club" y "Google"
+          p Es mejor que selecciones una localización cercana a donde estés, por seguridad; Así no parecerá que te has "teleportado" si abres el juego a continuación
+
+        div
+          button.btn.btn-success.btn-lg.btn-login(type='submit')
+            | Conectarse
+
+      ul.nav.nav-tabs.nav-stacked.col-md-2.col-lg-2.col-sm-2.col-xs-4(ng-repeat='pokemon in $ctrl.pokeLista')
+              li
+                img.text-center.img-responsive.center-block(src='{{ pokemon.info.img }}')
+                h5.text-center {{ pokemon.info.name }}
+                p.text-center CP {{ pokemon.cp }}
+                p.text-center(ng-class="(pokemon.indAttack == 15) ? 'bg-success' : ((pokemon.indAttack >= 12) ? 'bg-warning' : '')") ATK {{ pokemon.indAttack }}
+                p.text-center(ng-class="(pokemon.indDefense == 15) ? 'bg-success' : ((pokemon.indDefense >= 12) ? 'bg-warning' : '')") DEF {{ pokemon.indDefense }}
+                p.text-center(ng-class="(pokemon.indStamina == 15) ? 'bg-success' : ((pokemon.indStamina >= 12) ? 'bg-warning' : '')") STA {{ pokemon.indStamina }}
